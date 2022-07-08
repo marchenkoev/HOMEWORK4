@@ -1,0 +1,89 @@
+﻿// Задача 27. Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
+
+int n = Convert.ToInt32(Console.ReadLine());
+int sum = 0;
+
+while (n > 0)
+{
+    int num = n % 10;
+    n = n / 10;
+    sum = sum + num;
+}
+Console.WriteLine("->" + sum);
+
+// Задача 29: Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран
+
+Console.Write("Введите ряд чисел, разделенных запятой : ");
+string? seriesOfNumbers = Console.ReadLine();
+
+seriesOfNumbers = seriesOfNumbers + ",";
+
+string RemovingSpaces (string series){
+  string seriesNew = "";
+  for (int i = 0; i < series.Length; i++)
+  {
+    if (series[i] != ' ') 
+    {
+      seriesNew += series[i];
+    }
+  }
+  return seriesNew;
+}
+ 
+void СheckNumber2 (int  series){
+
+      if (series == '0'||series == '1'||series == '2'
+      ||series == '3'||series == '4'||series == '5'||series == '6'
+      ||series == '7'||series == '8'||series == '9'||series == ','
+      ||series == '-')
+      {
+      }
+        else {
+          Console.WriteLine($"Ошибка ввода  символа. Вводи цифры.");
+
+      }
+}
+
+int[] ArrayOfNumbers(string seriesNew){ 
+
+  int[] arrayOfNumbers = new int[1];
+
+  int j =0;
+
+  for (int i = 0; i < seriesNew.Length; i++){
+    string seriesNew1 = "";
+
+    while (seriesNew[i] != ',' && i < seriesNew.Length){
+      seriesNew1 += seriesNew[i];
+      СheckNumber2(seriesNew[i]);
+      i++;
+    }
+    arrayOfNumbers[j] = Convert.ToInt32(seriesNew1);
+    if (i < seriesNew.Length-1){
+      arrayOfNumbers = arrayOfNumbers.Concat(new int[] {0}).ToArray();
+    }
+    j++;
+  }
+  return arrayOfNumbers;
+}
+
+void PrintArry(int[] coll){
+  int count = coll.Length;
+  int index = 0;
+  Console.Write("[");
+  while(index < count){
+    Console.Write(coll[index]);
+    index++;
+    if (index < count){
+      Console.Write(", ");
+    }
+  }
+  Console.Write("]");
+} 
+
+
+string seriesNew = RemovingSpaces(seriesOfNumbers);
+
+int[] arrayOfNumbers =  ArrayOfNumbers(seriesNew);
+
+PrintArry(arrayOfNumbers);
